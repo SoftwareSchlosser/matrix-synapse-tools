@@ -90,7 +90,7 @@ def RemoveEvents():
   sQuery = f"SELECT e.event_id, e.room_id, e.content, ej.json \
  FROM events e \
  JOIN event_json ej ON ej.event_id = e.event_id and ej.room_id = e.room_id \
- WHERE e.contains_URL=TRUE AND " + GetQueryConditions("e.origin_server_ts", "e.room_id", "e.user_id", "e.event_id", None)
+ WHERE e.contains_URL=TRUE AND " + GetQueryConditions("e.origin_server_ts", "e.room_id", "e.sender", "e.event_id", None)
 
   hCursor.execute(sQuery)
 
@@ -177,5 +177,5 @@ def RemoveMedia():
 
 if (args.remove_media == True):
   RemoveMedia()
-if (args.remove_message_events == True):
+elif (args.remove_message_events == True):
   RemoveEvents()
